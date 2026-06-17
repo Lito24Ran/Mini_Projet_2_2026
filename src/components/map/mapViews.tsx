@@ -3,14 +3,11 @@ import { StyleSheet, View, Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function MapComponents() {
-  // Coordonnées de la boîte de limitation (Bounding Box) pour Antananarivo
-  // Format : [Longitude Minimum, Latitude Minimum, Longitude Maximum, Latitude Maximum]
   const minLon = 47.4500;
   const minLat = -18.9500;
   const maxLon = 47.6000;
   const maxLat = -18.8000;
 
-  // Code HTML personnalisé pour afficher uniquement la carte sans les menus d'OSM
   const mapHtml = `
     <!DOCTYPE html>
     <html>
@@ -40,10 +37,8 @@ export default function MapComponents() {
         originWhitelist={['*']}
         source={{ html: mapHtml }} 
         style={styles.map}
-        // Sécurité : Si l'utilisateur clique sur un lien externe, on l'empêche de naviguer ailleurs
         onNavigationStateChange={(navState) => {
           if (!navState.url.includes('openstreetmap.org') && navState.url !== 'about:blank') {
-            // Optionnel : tu peux forcer le rechargement si nécessaire
           }
         }}
       />
