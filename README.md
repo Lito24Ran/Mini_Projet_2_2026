@@ -19,6 +19,11 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
       npx expo install react-native-maps 
    ```
+4. Un picker pour l' ajout des fichiers
+  ```bash
+      npx expo install expo-image-picker
+   ```
+
 
 In the output, you'll find options to open the app in a
 
