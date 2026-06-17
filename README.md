@@ -23,6 +23,10 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
   ```bash
       npx expo install expo-image-picker
    ```
+5. Pour la map
+  ```bash
+      npx expo install react-native-webview
+   ```
 
 
 In the output, you'll find options to open the app in a
