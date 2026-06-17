@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, Dimensions } fr
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Button from '@/components/button/Button';
+import Navbar from '@/components/NavigationBarr/Navigation';
 
 export default function ImageUploader() {
   const [images, setImages] = useState<string[]>([]);
@@ -35,39 +36,43 @@ export default function ImageUploader() {
   };
 
   return (
- <View style={styles.container}>
-      <Text style={styles.title}>Ajouter vos images ({images.length}/2)</Text>
+    <View style={styles.container}>
+        <Text style={styles.title}>Ajouter vos images ({images.length}/2)</Text>
 
-      <View style={styles.row}>
-        {images.length < 2 && (
-          <TouchableOpacity style={styles.uploadBox} onPress={pickImage} activeOpacity={0.7}>
-            <AntDesign name="plus-circle" size={28} color="#515d7d" />
-            <Text style={styles.uploadText}>Ajouter</Text>
-          </TouchableOpacity>
-        )}
-
-        {/* Affichage des miniatures des images sélectionnées */}
-        {images.map((uri, index) => (
-          <View key={index} style={styles.imageWrapper}>
-            <Image source={{ uri: uri }} style={styles.previewImage} />
-            <TouchableOpacity style={styles.deleteButton} onPress={() => removeImage(index)}>
-              <FontAwesome name="times-circle" size={22} color="#ff4d4d" />
+        <View style={styles.row}>
+            {images.length < 2 && (
+            <TouchableOpacity style={styles.uploadBox} onPress={pickImage} activeOpacity={0.7}>
+                <AntDesign name="plus-circle" size={28} color="#515d7d" />
+                <Text style={styles.uploadText}>Ajouter</Text>
             </TouchableOpacity>
-          </View>
-        ))}
-      </View>
+            )}
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.submitButton} 
-          onPress={() => {
-            console.log("Images prêtes à l'envoi :", images);
-          }}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.submitButtonText}>Valider</Text>
-        </TouchableOpacity>
-      </View>
+            {/* Affichage des miniatures des images sélectionnées */}
+            {images.map((uri, index) => (
+            <View key={index} style={styles.imageWrapper}>
+                <Image source={{ uri: uri }} style={styles.previewImage} />
+                <TouchableOpacity style={styles.deleteButton} onPress={() => removeImage(index)}>
+                <FontAwesome name="times-circle" size={22} color="#ff4d4d" />
+                </TouchableOpacity>
+            </View>
+            ))}
+        </View>
+
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+            style={styles.submitButton} 
+            onPress={() => {
+                console.log("Images prêtes à l'envoi :", images);
+            }}
+            activeOpacity={0.8}
+            >
+            <Text style={styles.submitButtonText}>Valider</Text>
+            </TouchableOpacity>
+        </View>
+
+        {/* <View>
+            <Navbar/>
+        </View> */}
     </View>
     
   );
@@ -152,4 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  container_navbar: {
+    marginTop : 500
+  }
 });

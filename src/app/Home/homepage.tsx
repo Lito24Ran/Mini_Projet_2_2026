@@ -8,10 +8,10 @@ const Homepage = () => {
   return (
     <View style={styles.container}>
       
-      {/* <MapComponents />
+      <MapComponents />
       <Searchbar/>
-      <Navbar/> */}
-      <ImageUploader/>
+      <Navbar/>
+      {/* <ImageUploader/> */}
     </View>
   );
 };
