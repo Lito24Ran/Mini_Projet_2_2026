@@ -3,14 +3,15 @@ import Navbar from '@/components/NavigationBarr/Navigation';
 import { View, StyleSheet,Text} from 'react-native';
 import Searchbar from '@/components/searchBarr/search';
 import ImageUploader from '../Demande/Demande';
+import PublicationPage from '../Publication/PublicationPage';
 
 const Homepage = () => {
   return (
     <View style={styles.container}>
-      
-      <MapComponents />
+      <PublicationPage />
+      {/* <MapComponents />
       <Searchbar/>
-      <Navbar/>
+      <Navbar/> */}
       {/* <ImageUploader/> */}
     </View>
   );
