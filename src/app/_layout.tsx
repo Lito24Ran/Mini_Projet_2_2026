@@ -1,19 +1,20 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import { useColorScheme } from 'react-native';
-import SplashScreen from './Acceuil/Acceuil';
-import Homepage from './Home/homepage';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Stack } from 'expo-router';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function MyStack() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* <AnimatedSplashOverlay />
-      <AppTabs /> */}
-      {/* <Login/>  */}
-      <Homepage/>
-      {/* <SplashScreen/> */}
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen 
+        name="Home/homepage" 
+        options={{ 
+          title: 'Home',
+          headerShown: false
+        }} 
+      />
+      
+      <Stack.Screen name="Publication/PublicationPage" options={{ title: 'Publication' }} />
+      <Stack.Screen name='Listepub/ListePublication' options={{ title: 'Liste' }} />
+      <Stack.Screen name="Acceuil/Acceuil" options={{ title: 'Acceuil' }} />
+      <Stack.Screen name="Demande/Demande" options={{ title: 'Demande' }} />
+    </Stack>
   );
 }

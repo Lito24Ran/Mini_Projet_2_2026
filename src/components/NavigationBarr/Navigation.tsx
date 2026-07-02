@@ -1,16 +1,27 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
 import { FontAwesome, AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+
 
 export default function Navbar() {
+
+  const router = useRouter()
+
   return (
     <View style={styles.navbarContainer}>
       
       <TouchableOpacity style={styles.navButton} activeOpacity={0.7}>
-        <FontAwesome name="home" size={28} color="#ffffff" />
+        <FontAwesome name="home" size={28} color="#ffffff" onPress={()=> router.push('/Home/homepage')}/>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.navButton} activeOpacity={0.7}>
+        <View>
+          <AntDesign name = "message" size={29} color="#344163"/>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => router.push('/Demande/Demande')}>
         <View style={styles.plusIconBg}>
           <AntDesign name="plus" size={24} color="#344163" />
         </View>
@@ -18,6 +29,10 @@ export default function Navbar() {
 
       <TouchableOpacity style={styles.navButton} activeOpacity={0.7}>
         <FontAwesome5 name="bell" size={26} color="#515d7d" />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => router.push('/Listepub/ListePublication')}>
+        <FontAwesome5 name="list" size={24} color="#515d7d" />
       </TouchableOpacity>
     </View>
   );

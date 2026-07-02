@@ -8,10 +8,10 @@ import PublicationPage from '../Publication/PublicationPage';
 const Homepage = () => {
   return (
     <View style={styles.container}>
-      <PublicationPage />
-      {/* <MapComponents />
+      {/* <PublicationPage /> */}
+      <MapComponents />
       <Searchbar/>
-      <Navbar/> */}
+      <Navbar/>
       {/* <ImageUploader/> */}
     </View>
   );
