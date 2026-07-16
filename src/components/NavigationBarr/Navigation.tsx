@@ -2,11 +2,30 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
 import { FontAwesome, AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import Api from '@/app/Service/Api';
 
 
 export default function Navbar() {
 
   const router = useRouter()
+  const {Approuver_demande} = Api();
+
+ const gererApprobation = async () => {
+    try {
+    
+      const resultat = await Approuver_demande();
+
+      if (resultat === 1) {
+
+        router.push('/Publication/PublicationPage'); 
+      }
+      else {
+        router.push('/Demande/Demande');
+      }
+    } catch (error) {
+      console.error("La navigation a échoué car l'API a renvoyé une erreur", error);
+    }
+  };
 
   return (
     <View style={styles.navbarContainer}>
@@ -21,7 +40,7 @@ export default function Navbar() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => router.push('/Demande/Demande')}>
+      <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={gererApprobation}>
         <View style={styles.plusIconBg}>
           <AntDesign name="plus" size={24} color="#344163" />
         </View>

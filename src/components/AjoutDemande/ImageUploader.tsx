@@ -4,9 +4,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Button from '@/components/button/Button';
 import Navbar from '@/components/NavigationBarr/Navigation';
+import Api from '@/app/Service/Api';
 
 export default function ImageUploader() {
   const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const { envoyerDemande } = Api();
 
   const pickImage = async () => {
     if (images.length >= 2) {
@@ -15,24 +19,44 @@ export default function ImageUploader() {
     }
 
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
+
     if (permissionResult.granted === false) {
       Alert.alert("Permission refusée", "Vous devez autoriser l'accès à vos photos pour continuer.");
       return;
     }
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true, 
+      mediaTypes:['images'],
+      allowsEditing: true,
       aspect: [4, 3],
-      quality: 0.8, 
+      quality: 0.8,
     });
 
     if (!result.canceled && result.assets && result.assets[0].uri) {
       setImages([...images, result.assets[0].uri]);
     }
   };
+
   const removeImage = (indexToRemove: number) => {
     setImages(images.filter((_, index) => index !== indexToRemove));
+  };
+
+  const handleValider = async () => {
+    if (images.length < 2) {
+      Alert.alert("Images manquantes", "Veuillez ajouter les 2 images avant de valider.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const data = await envoyerDemande(images[0], images[1]);
+      Alert.alert("Succès", "Demande envoyée avec succès !");
+      setImages([]);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la demande :", error);
+      Alert.alert("Erreur", "L'envoi de la demande a échoué. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,6 +87,7 @@ export default function ImageUploader() {
             style={styles.submitButton} 
             onPress={() => {
                 console.log("Images prêtes à l'envoi :", images);
+                handleValider();
             }}
             activeOpacity={0.8}
             >
